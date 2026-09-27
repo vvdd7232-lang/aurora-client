@@ -49,7 +49,7 @@ public final class AuroraHud implements HudElement {
                 mc.getCurrentFps() + " FPS",
                 (ping >= 0 ? ping + " MS" : "--- MS"),
                 "XYZ " + pos.getX() + " / " + pos.getY() + " / " + pos.getZ(),
-                mc.player.getHorizontalFacing().getName().toUpperCase()
+                mc.player.getHorizontalFacing().asString().toUpperCase()
         };
         int width = 0;
         for (String line : lines) {

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "aurora_client",
+  "version": "${version}",
+  "name": "Aurora Client",
+  "description": "Визуальный макет клиента Aurora. Функции пока отключены.",
+  "environment": "client",
+  "entrypoints": { "client": ["ru.aurora.client.AuroraClient"] },
+  "depends": { "fabricloader": ">=0.18.0", "minecraft": "~1.21.11", "java": ">=21", "fabric-api": "*" }
+}

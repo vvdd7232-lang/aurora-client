@@ -76,8 +76,9 @@ public final class AuroraScreen extends Screen {
         }
         int x = panelX(), y = panelY();
 
-        // Backdrop: frosted blur, dim and a soft vignette.
-        c.applyBlur();
+        // Backdrop: vanilla Screen already blurred once this frame (calling
+        // applyBlur() again crashes with "Can only blur once per frame"),
+        // so we only add dimming and a soft vignette on top.
         c.fill(0, 0, width, height, 0xB8070910);
         c.fillGradient(0, 0, width, height / 4, 0x50000000, 0x00000000);
         c.fillGradient(0, height - height / 4, width, height, 0x00000000, 0x50000000);

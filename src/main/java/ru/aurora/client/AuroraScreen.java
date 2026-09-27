@@ -12,13 +12,14 @@ public final class AuroraScreen extends Screen {
     private static final int FAINT = 0xFF68738A;
     private static final int ACCENT = 0xFFB18CFF;
     private static final String[] TABS = {"Обзор", "Бой", "Движение", "Визуал", "Игрок", "Утилиты"};
+    private static final String[] OVERVIEW_MODULES =
+            {"AIM ASSIST", "SPRINT", "FULLBRIGHT", "AUTO TOTEM", "HUD EDITOR", "VELOCITY"};
     private static final String[][] MODULES = {
             {"AIM ASSIST", "TRIGGER BOT", "VELOCITY", "CRITICALS", "REACH", "TARGET HUD"},
             {"SPRINT", "FLIGHT", "SPEED", "SAFE WALK", "STEP", "NO SLOW"},
             {"FULLBRIGHT", "TRACERS", "ESP", "CHAMS", "CROSSHAIR", "WORLD COLOR"},
             {"AUTO TOTEM", "FAST PLACE", "NO FALL", "INVENTORY", "TIMER", "PEARL TRACKER"},
-            {"KEYS", "HUD EDITOR", "CONFIGS", "STAFF ALERT", "CLIENT THEME", "SCREEN INFO"},
-            {"WAYPOINTS", "CHAT TOOLS", "SESSION", "ITEM TAGS", "PANIC KEY", "CLIENT INFO"}
+            {"KEYS", "HUD EDITOR", "CONFIGS", "STAFF ALERT", "CLIENT THEME", "SCREEN INFO"}
     };
     private int activeTab = 0;
     private float animation = 0;
@@ -27,11 +28,16 @@ public final class AuroraScreen extends Screen {
     public AuroraScreen() { super(Text.literal("Aurora")); }
     @Override public boolean shouldPause() { return false; }
 
+    private int panelW() { return Math.min(760, width - 32); }
+    private int panelH() { return Math.min(470, height - 32); }
+    private int panelX() { return (width - panelW()) / 2 - (int) ((1 - animation) * 18); }
+    private int panelY() { return (height - panelH()) / 2; }
+
     @Override public void render(DrawContext c, int mouseX, int mouseY, float delta) {
         animation = Math.min(1f, animation + delta * 2.5f);
-        int w = Math.min(760, width - 32), h = Math.min(470, height - 32);
+        int w = panelW(), h = panelH();
         if (w < 380 || h < 260) { super.render(c, mouseX, mouseY, delta); return; }
-        int x = (width - w) / 2, y = (height - h) / 2;
+        int x = panelX(), y = panelY();
         // Dim the game world and draw the deep, layered shell.
         c.fill(0, 0, width, height, 0xB8070910);
         c.fill(x - 1, y - 1, x + w + 1, y + h + 1, 0xFF343044);
@@ -122,8 +128,7 @@ public final class AuroraScreen extends Screen {
 
     @Override public boolean mouseClicked(Click click, boolean doubled) {
         double mouseX = click.x(), mouseY = click.y();
-        int w = Math.min(760, width - 32), h = Math.min(470, height - 32);
-        int x = (width - w) / 2, y = (height - h) / 2;
+        int x = panelX(), y = panelY();
         for (int i = 0; i < TABS.length; i++) {
             int ty = y + 88 + i * 32;
             if (mouseX >= x + 12 && mouseX <= x + 161 && mouseY >= ty - 4 && mouseY < ty + 23) {

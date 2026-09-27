@@ -94,9 +94,7 @@ public final class AuroraScreen extends Screen {
         c.drawText(textRenderer, "Поиск модулей...", mx + 27, gridTop + 7, FAINT, false);
         c.drawText(textRenderer, "ВСЕ  ·  06", right - 59, gridTop + 7, FAINT, false);
 
-        String[][] names = activeTab == 0 ? new String[][] {
-                {"AIM ASSIST", "SPRINT", "FULLBRIGHT", "AUTO TOTEM", "HUD EDITOR", "VELOCITY"}
-        } : MODULES;
+        String[] names = activeTab == 0 ? OVERVIEW_MODULES : MODULES[activeTab - 1];
         int cardW = (right - mx - 10) / 2;
         int cardH = 58;
         for (int i = 0; i < 6; i++) {
@@ -107,7 +105,7 @@ public final class AuroraScreen extends Screen {
             c.fill(bx, by, bx + 2, by + cardH, hover ? 0xFF9B7BFF : 0xFF343344);
             c.fill(bx + 12, by + 12, bx + 31, by + 31, 0xFF282237);
             c.drawText(textRenderer, cardIcon(i), bx + 18, by + 18, 0xFFC6ACFF, false);
-            c.drawText(textRenderer, names[0][i], bx + 40, by + 12, WHITE, false);
+            c.drawText(textRenderer, names[i], bx + 40, by + 12, WHITE, false);
             c.drawText(textRenderer, "В разработке", bx + 40, by + 29, FAINT, false);
             // Muted, inactive switch — deliberately non-interactive.
             c.fill(bx + cardW - 35, by + 19, bx + cardW - 13, by + 31, 0xFF303645);

@@ -1,10 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "aurora_client",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "Aurora Client",
-  "description": "Визуальный макет клиента Aurora. Функции пока отключены.",
+  "description": "Aurora — legkij klient s sovremennym interfejsom. Vklyuchaet Fullbright, Zoom, NoHurtCam i AutoSprint.",
+  "icon": "assets/aurora/icon.png",
   "environment": "client",
   "entrypoints": { "client": ["ru.aurora.client.AuroraClient"] },
-  "depends": { "fabricloader": ">=0.18.0", "minecraft": "~1.21.11", "java": ">=21", "fabric-api": "*" }
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
 }

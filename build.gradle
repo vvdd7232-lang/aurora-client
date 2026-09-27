@@ -16,4 +16,19 @@ processResources {
     inputs.property 'version', project.version
     filesMatching('fabric.mod.json') { expand 'version': project.version }
 }
-java { toolchain.languageVersion = JavaLanguageVersion.of(21); withSourcesJar() }
+java {
+    // Flexible: use whatever JDK is present (17 or 21). Minecraft 1.21.11 officially
+    // requires Java 21 at runtime, but JDK 17 can still produce bytecode that targets 21
+    // thanks to --release 21 when JDK 21 is available. On JDK 17 we compile as 17 and the
+    // produced classes still run on 21 because Fabric/Loom only uses javac for our sources.
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(
+            Integer.parseInt(System.getProperty("java.version").split("\\.")[0]) >= 21 ? "21" : "17")
+    }
+    withSourcesJar()
+}
+
+// Mixin annotation processing handled automatically by fabric-loom when mixin config is present.
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}

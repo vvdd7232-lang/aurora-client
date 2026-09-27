@@ -4,3 +4,5 @@ run/
 .idea/
 *.iml
 .DS_Store
+build/
+aurora-client-1.0.0.jar

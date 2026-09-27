@@ -3,8 +3,9 @@
   "id": "aurora_client",
   "version": "${version}",
   "name": "Aurora Client",
-  "description": "Визуальный макет клиента Aurora. Функции пока отключены.",
+  "description": "Визуальный клиент Aurora: меню на Right Shift, модули Fullbright, HUD и Crosshair.",
   "environment": "client",
   "entrypoints": { "client": ["ru.aurora.client.AuroraClient"] },
+  "mixins": ["aurora.client.mixins.json"],
   "depends": { "fabricloader": ">=0.18.0", "minecraft": "~1.21.11", "java": ">=21", "fabric-api": "*" }
 }
